@@ -1,0 +1,21 @@
+<!-- project_list.html  -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project List</title>
+  </head>
+  <body>
+    <h1>Projects</h1>
+    <ul>
+      {% for project in projects %}
+      <li>
+        <a href="{% url 'project_detail' project.id %}">{{ project.title }}</a>
+        (Managed by: {{ project.manager.username }})
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'create_project' %}">Create New Project</a>
+  </body>
+</html>

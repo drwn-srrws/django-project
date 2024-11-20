@@ -1,0 +1,11 @@
+<!-- templates/components/multiselect_users.html -->
+
+{% load static %}
+
+<select name="users" id="id_users" class="form-control" multiple>
+    {% for user in users %}
+        <option value="{{ user.id }}" {% if user.id in selected_users %}selected{% endif %}>
+            {{ user.username }}
+        </option>
+    {% endfor %}
+</select>

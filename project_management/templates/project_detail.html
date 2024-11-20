@@ -1,0 +1,30 @@
+<!-- project_detail.html  -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ project.title }}</title>
+  </head>
+  <body>
+    <h1>{{ project.title }}</h1>
+    <p>Managed by: {{ project.manager.username }}</p>
+    <p>Users:</p>
+    <ul>
+      {% for user in project.users.all %}
+      <li>{{ user.username }}</li>
+      {% endfor %}
+    </ul>
+    <h2>Tasks</h2>
+    <ul>
+      {% for task in project.task_set.all %}
+      <li>
+        {{ task.title }} - {{ task.status }}
+        <a href="#">View Task</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'create_task' project.id %}">Add Task</a>
+    <a href="{% url 'project_list' %}">Back to Projects</a>
+  </body>
+</html>
