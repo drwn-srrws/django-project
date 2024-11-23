@@ -1,6 +1,9 @@
 <!-- project_list.html  -->
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% block content %}
+
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +19,9 @@
       </li>
       {% endfor %}
     </ul>
-    <a href="{% url 'create_project' %}">Create New Project</a>
+    {% if user.role == 'Manager' or user.is_staff %}
+      <a href="{% url 'create_project' %}">Create New Project</a>
+    {% endif %}
   </body>
-</html>
+
+{% endblock %}

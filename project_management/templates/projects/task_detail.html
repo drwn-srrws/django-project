@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ task.title }}</title>
+  </head>
+  <body>
+    <h1>{{ task.title }}</h1>
+    <p>Status: {{ task.status }}</p>
+    <p>Description: {{ task.description }}</p>
+    <p>Assigned to: {{ task.assigned.username }}</p>
+
+    <h2>Reports</h2>
+    <ul>
+      {% for report in task.reports.all %}
+      <li>
+        <p><strong>Progress:</strong> {{ report.progress }}</p>
+        <p><strong>Time Spent:</strong> {{ report.time_spent }} hours</p>
+        <p><strong>Result:</strong> {{ report.result }}</p>
+        <p><strong>Submitted by:</strong> {{ report.user.username }}</p>
+      </li>
+      {% empty %}
+      <p>No reports submitted yet.</p>
+      {% endfor %}
+    </ul>
+
+    {% if user.role == 'Employee' %}
+    <a href="{% url 'add_report' task.id %}">Add Report</a>
+    {% endif %}
+
+    {% if user.role == 'Manager' %}
+    <a href="{% url 'edit_task' task.id %}">Edit Task</a>
+    {% endif %}
+    <a href="{% url 'project_detail' task.project.id %}">Back to Project</a>
+  </body>
+</html>

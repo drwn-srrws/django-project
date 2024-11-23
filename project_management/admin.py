@@ -1,7 +1,9 @@
 from django.contrib import admin
 from .models import User, Comment, Report, Task, Project
 from django.contrib.auth.admin import UserAdmin
-
+from django.forms import ModelMultipleChoiceField, Textarea
+from django.db.models import ManyToManyField
+from django.db import models
 
 class CustomUserAdmin(UserAdmin):
     model = User
@@ -44,10 +46,14 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
+class ProjectAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        ManyToManyField: {'widget': admin.widgets.FilteredSelectMultiple('Users', is_stacked=False)},
+    }
 
 # Регистрация кастомного класса администратора
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Comment)
 admin.site.register(Report)
 admin.site.register(Task)
-admin.site.register(Project)
+admin.site.register(Project, ProjectAdmin)

@@ -71,6 +71,6 @@ class Project(models.Model):
         User, on_delete=models.CASCADE, related_name="managed_projects"
     )
     users = models.ManyToManyField(User, related_name="projects")
-    comments = models.ManyToManyField(Comment)
+    comments = models.ManyToManyField(Comment, blank=True)
     deadline = models.DateField()
     description = models.TextField(blank=True)

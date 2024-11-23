@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Projects{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
-    <h1>Projects</h1>
+    <h1>User Profile</h1>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+    
+    <a href="{% url 'edit_profile' %}" class="button">Edit Profile</a> <!-- Ссылка на страницу редактирования профиля -->
+    
+    <h2>Projects</h2>
     <ul>
-        {% for project in projects %}
+        {% for project in user.projects.all %}
             <li>
                 <a href="{% url 'project_detail' project.id %}">{{ project.title }}</a>
             </li>

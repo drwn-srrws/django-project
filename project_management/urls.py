@@ -41,4 +41,20 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     # Создание проекта
     path("projects/new/", views.create_project, name="create_project"),
+    # Детальная страница проекта
+    path("projects/<int:project_id>/", views.project_detail, name="project_detail"),
+    # Добавление задачи
+    path("projects/<int:project_id>/add_task/", views.add_task, name="add_task"),
+    # Детальная страница задачи
+    path("tasks/<int:task_id>/", views.task_detail, name="task_detail"),
+    # Добавление отчета
+    path("tasks/<int:task_id>/add_report/", views.add_report, name="add_report"),
+    # Редактирование проекта
+    path("projects/<int:project_id>/edit/", views.edit_project, name="edit_project"),
+    # Редактирование задачи
+    path("tasks/<int:task_id>/edit/", views.edit_task, name="edit_task"),
+    # Удаление проекта
+    path("projects/<int:project_id>/delete/", views.delete_project, name="delete_project"),
+    # Редактирование профиля
+    path("profile/edit/", views.edit_profile, name="edit_profile"),
 ]
